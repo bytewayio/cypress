@@ -3,7 +3,7 @@ package cypress
 import (
 	"encoding/gob"
 	"errors"
-	"io/ioutil"
+
 	"os"
 	"path"
 	"time"
@@ -159,7 +159,7 @@ func (store *fileSessionStore) readSession(id string) (*fileSessionItem, error) 
 }
 
 func (store *fileSessionStore) doGC() {
-	files, err := ioutil.ReadDir(store.path)
+	files, err := os.ReadDir(store.path)
 	if err != nil {
 		zap.L().Error("failed to run GC on file session store", zap.Error(err))
 		return
